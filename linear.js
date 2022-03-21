@@ -7,23 +7,21 @@
 const set1 = [3, 1, 7, 9];
 const set2 = [2, 4, 1, 9, 3];
 
-// const commonSetA = set1.filter(set => {
-//     for(i=0; i<set2.length; i++){
-//         if (set == set2[i]){
-//             return true;
-//         }
-//     }
-// });
-
-// console.log(commonSetA);
 
 const sumDistinctHandler = (setA, setB) => {
-    for(i=0; i<setA.length; i++){
-        for (j=0; j<setB.length; j++){
-            var distinct = [];
-            return [setA[i], setB[j]];
-        }
-    }
+    const firstDistinct = setA.filter (item => {
+        return !setB.includes(item);
+    })
+    const secondDistinct = setB.filter (item => {
+        return !setA.includes(item);
+    })
+
+    const distinctSum = firstDistinct.concat(secondDistinct);
+    let sum = 0;
+    for(let i=0; i<distinctSum.length; i++){
+        sum += distinctSum[i];
+    } 
+    return sum;
 };
 
 console.log(sumDistinctHandler(set1, set2));
@@ -42,26 +40,23 @@ console.log(sumDistinctHandler(set1, set2));
 const set3 = [12, 13, 6, 10];
 const set4 = [13, 10, 16, 15];
 
-const commonSetB = set3.filter(set => {
-    for(i=0; i<set4.length; i++){
-        if (set == set4[i]){
-            return true;
+const overlapSum = (setC, setD) => {
+    const myCommonSet = setC.filter( set => {
+        for(i=0; i<setD.length; i++){
+            if (set == setD[i]){
+                return true;
+            }
         }
-    }
-});
+    });
 
-console.log(commonSetB);
-
-const overlapSum = common => {
-    let sum = 0;
-    for(i=0; i<common.length; i++){
-        sum += common[i];
+    let addSet = 0;
+    for(i=0; i<myCommonSet.length; i++){
+        addSet += myCommonSet[i];
     }
-    return sum * 2;
+    return addSet * 2;
 }
 
-console.log(overlapSum(commonSetB));
-
+console.log(overlapSum(set3, set4));
 
 // Problem 1, Solution 2 with an hash table.
 // Insert all the elements from both the sets with the element as key and its count (in both arrays).
