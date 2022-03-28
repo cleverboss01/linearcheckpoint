@@ -63,3 +63,29 @@ console.log(overlapSum(set3, set4));
 // Now iterate through the constructed map and sum all the elements with count = 1.
 // Problem 2, same approaches with little modifications.
 
+const hash = [
+    {'12': 0},
+    {'13': 1},
+    {'6': 0},
+    {'10': 1},
+    {'15': 0},
+    {'16': 0}
+];
+
+let sum = 0;
+const hashSum = arr => {
+    for(i = 0; i<arr.length; i++){
+        //Set an array of every possible positive integer
+        let j = [6,10,12,13,15,16];
+        for(k=0; k<j.length; k++){
+            let count = hash[i][j[k]];
+            if(count == 1){
+                sum += j[k];
+            }
+        }
+    }
+    return sum * 2;
+};
+
+
+console.log(hashSum(hash));
